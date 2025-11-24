@@ -1,522 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Hub - Modern Registry</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --secondary: #8b5cf6;
-      --success: #10b981;
-      --danger: #ef4444;
-      --dark: #0f172a;
-      --gray: #64748b;
-      --light-gray: #f1f5f9;
-      --border: #e2e8f0;
-      --shadow: rgba(0, 0, 0, 0.1);
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      padding: 20px;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .header {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      margin-bottom: 30px;
-      box-shadow: 0 10px 30px var(--shadow);
-    }
-
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .logo-section h1 {
-      color: var(--primary);
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-
-    .logo-section p {
-      color: var(--gray);
-      font-size: 0.9rem;
-    }
-
-    .stats {
-      display: flex;
-      gap: 30px;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-number {
-      display: block;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--gray);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .main-grid {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 30px;
-      margin-bottom: 30px;
-    }
-
-    @media (max-width: 968px) {
-      .main-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px var(--shadow);
-    }
-
-    .card-title {
-      font-size: 1.5rem;
-      color: var(--dark);
-      margin-bottom: 25px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .icon {
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--dark);
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      background: white;
-    }
-
-    input:focus, select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-    }
-
-    .btn {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-    }
-
-    .btn-secondary {
-      background: var(--light-gray);
-      color: var(--gray);
-      width: 100%;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    .btn-secondary:hover {
-      background: var(--border);
-    }
-
-    .search-bar {
-      position: relative;
-      margin-bottom: 20px;
-    }
-
-    .search-bar input {
-      padding-left: 45px;
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--gray);
-      font-size: 1.2rem;
-    }
-
-    .student-list {
-      max-height: 500px;
-      overflow-y: auto;
-    }
-
-    .student-item {
-      background: var(--light-gray);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-    }
-
-    .student-item:hover {
-      border-color: var(--primary);
-      transform: translateX(5px);
-    }
-
-    .student-info h3 {
-      color: var(--dark);
-      font-size: 1.1rem;
-      margin-bottom: 5px;
-    }
-
-    .student-meta {
-      display: flex;
-      gap: 15px;
-      font-size: 0.85rem;
-      color: var(--gray);
-    }
-
-    .badge {
-      background: white;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-weight: 600;
-    }
-
-    .btn-delete {
-      background: var(--danger);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
-    }
-
-    .btn-delete:hover {
-      background: #dc2626;
-      transform: scale(1.05);
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--gray);
-    }
-
-    .empty-state-icon {
-      font-size: 4rem;
-      margin-bottom: 20px;
-      opacity: 0.5;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: white;
-      padding: 20px 30px;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px var(--shadow);
-      display: none;
-      align-items: center;
-      gap: 15px;
-      animation: slideIn 0.3s ease;
-      z-index: 1000;
-    }
-
-    .toast.show {
-      display: flex;
-    }
-
-    .toast.success {
-      border-left: 4px solid var(--success);
-    }
-
-    .toast.error {
-      border-left: 4px solid var(--danger);
-    }
-
-    @keyframes slideIn {
-      from {
-        transform: translateX(400px);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    .footer {
-      text-align: center;
-      color: white;
-      padding: 20px;
-      margin-top: 30px;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bloody Sweet — Student Registry</title>
+  <meta name="description" content="A clean, accessible student registry UI by Aman Pathak." />
+  <meta property="og:title" content="Bloody Sweet — Student Registry" />
+  <meta property="og:description" content="A clean, accessible student registry UI by Aman Pathak." />
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <header class="header">
-      <div class="header-content">
-        <div class="logo-section">
-          <h1>🎓 Student Hub</h1>
-          <p>Modern Student Registry System</p>
-        </div>
-        <div class="stats">
-          <div class="stat-item">
-            <span class="stat-number" id="totalStudents">0</span>
-            <span class="stat-label">Students</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number" id="totalClasses">0</span>
-            <span class="stat-label">Classes</span>
-          </div>
-        </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1 class="logo">Bloody Sweet</h1>
+        <p class="tag">Student Registry · Created by Aman Pathak</p>
       </div>
-    </header>
+      <nav class="site-nav" role="navigation" aria-label="Main navigation">
+        <button id="themeToggle" aria-label="Toggle dark mode" class="btn icon-btn">🌓</button>
+      </nav>
+    </div>
+  </header>
 
-    <div class="main-grid">
-      <div class="card">
-        <h2 class="card-title">
-          <span class="icon">➕</span>
-          Add New Student
-        </h2>
-        <form id="studentForm">
-          <div class="form-group">
-            <label for="studentName">Student Name</label>
-            <input type="text" id="studentName" placeholder="Enter full name" required>
-          </div>
-          <div class="form-group">
-            <label for="rollNumber">Roll Number</label>
-            <input type="text" id="rollNumber" placeholder="e.g., 2024001" required>
-          </div>
-          <div class="form-group">
-            <label for="class">Class/Grade</label>
-            <select id="class" required>
-              <option value="">Select Class</option>
-              <option value="Grade 1">Grade 1</option>
-              <option value="Grade 2">Grade 2</option>
-              <option value="Grade 3">Grade 3</option>
-              <option value="Grade 4">Grade 4</option>
-              <option value="Grade 5">Grade 5</option>
-              <option value="Grade 6">Grade 6</option>
-              <option value="Grade 7">Grade 7</option>
-              <option value="Grade 8">Grade 8</option>
-              <option value="Grade 9">Grade 9</option>
-              <option value="Grade 10">Grade 10</option>
-              <option value="Grade 11">Grade 11</option>
-              <option value="Grade 12">Grade 12</option>
-              <option value="Undergraduate">Undergraduate</option>
-              <option value="Graduate">Graduate</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">
-            <span>✓</span> Add Student
-          </button>
-          <button type="reset" class="btn btn-secondary">Clear Form</button>
-        </form>
+  <main id="main" class="container" role="main">
+    <section class="card" aria-labelledby="formTitle">
+      <center><h2 id="formTitle">Add Student</h2></center>
+      <form id="studentForm" class="form" autocomplete="on" novalidate>
+
+        <label for="studentName">Student Name</label>
+        <input id="studentName" name="studentName" type="text" required aria-required="true" />
+
+        <label for="rollNumber">Roll Number</label>
+        <input id="rollNumber" name="rollNumber" type="text" inputmode="numeric" required aria-required="true" />
+
+        <label for="class">Class</label>
+        <select id="class" name="class" required aria-required="true">
+          <option value="Select">Select</option>
+          <option>Class 1</option>
+          <option>Class 2</option>
+          <option>Class 3</option>
+          <option>Class 4</option>
+          <option>Class 5</option>
+          <option>Class 6</option>
+          <option>Class 7</option>
+          <option>Class 8</option>
+          <option>Class 9</option>
+          <option>Class 10</option>
+          <option>Class 11</option>
+          <option>Class 12</option>
+          <option>Bachelor's(College)</option>
+          <option>Master's(College)</option>
+          <option>Others</option>
+        </select>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Add Student</button>
+          <button type="reset" class="btn">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card" aria-labelledby="tableTitle">
+      <h2 id="tableTitle">Students</h2>
+      <div class="table-wrap">
+        <table class="students-table" aria-describedby="tableTitle">
+          <thead>
+            <tr><th>Roll</th><th>Name</th><th>Class</th></tr>
+          </thead>
+          <tbody id="studentTableBody">
+            <!-- rows populated by JS -->
+          </tbody>
+        </table>
+        <div id="loadingIndicator" class="skeleton" aria-hidden="true"></div>
       </div>
+    </section>
+  </main>
 
-      <div class="card">
-        <h2 class="card-title">
-          <span class="icon">👥</span>
-          Student Directory
-        </h2>
-        <div class="search-bar">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="Search by name, roll number, or class...">
-        </div>
-        <div class="student-list" id="studentList">
-          <div class="empty-state">
-            <div class="empty-state-icon">📚</div>
-            <h3>No students yet</h3>
-            <p>Add your first student to get started</p>
-          </div>
-        </div>
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div>
+        <p>© <span id="year"></span> Aman Pathak</p>
+      </div>
+      <div class="socials" aria-hidden="false">
+        <a href="https://github.com/AmanPathak-DevOps" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a> ·
+        <a href="https://medium.com/@amanpathakdevops" target="_blank" rel="noopener" aria-label="Medium">Medium</a>
       </div>
     </div>
+  </footer>
 
-    <footer class="footer">
-      <p>© 2024 Student Hub • Built with ❤️</p>
-    </footer>
+  <!-- Accessible modal -->
+  <div id="customModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-overlay" onclick="closeModal()"></div>
+
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close" onclick="closeModal()">&times;</button>
+
+      <div class="modal-body">
+        <p class="modal-message">⚠️ Please fill out all fields.</p>
+      </div>
+    </div>
   </div>
 
-  <div id="toast" class="toast">
-    <span id="toastIcon">✓</span>
-    <span id="toastMessage">Success!</span>
-  </div>
 
-  <script>
-    let students = [];
-
-    function showToast(message, type = 'success') {
-      const toast = document.getElementById('toast');
-      const toastMessage = document.getElementById('toastMessage');
-      const toastIcon = document.getElementById('toastIcon');
-      
-      toast.className = `toast ${type} show`;
-      toastMessage.textContent = message;
-      toastIcon.textContent = type === 'success' ? '✓' : '✕';
-      
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3000);
-    }
-
-    function updateStats() {
-      document.getElementById('totalStudents').textContent = students.length;
-      const uniqueClasses = new Set(students.map(s => s.class));
-      document.getElementById('totalClasses').textContent = uniqueClasses.size;
-    }
-
-    function renderStudents(filteredStudents = students) {
-      const studentList = document.getElementById('studentList');
-      
-      if (filteredStudents.length === 0) {
-        studentList.innerHTML = `
-          <div class="empty-state">
-            <div class="empty-state-icon">📚</div>
-            <h3>No students found</h3>
-            <p>Try adjusting your search</p>
-          </div>
-        `;
-        return;
-      }
-
-      studentList.innerHTML = filteredStudents.map((student, index) => `
-        <div class="student-item">
-          <div class="student-info">
-            <h3>${student.name}</h3>
-            <div class="student-meta">
-              <span class="badge">Roll: ${student.roll}</span>
-              <span class="badge">${student.class}</span>
-            </div>
-          </div>
-          <button class="btn-delete" onclick="deleteStudent(${student.id})">Delete</button>
-        </div>
-      `).join('');
-    }
-
-    function deleteStudent(id) {
-      students = students.filter(s => s.id !== id);
-      renderStudents();
-      updateStats();
-      showToast('Student removed successfully', 'success');
-    }
-
-    document.getElementById('studentForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const name = document.getElementById('studentName').value.trim();
-      const roll = document.getElementById('rollNumber').value.trim();
-      const className = document.getElementById('class').value;
-
-      if (!name || !roll || !className) {
-        showToast('Please fill all fields', 'error');
-        return;
-      }
-
-      const student = {
-        id: Date.now(),
-        name,
-        roll,
-        class: className
-      };
-
-      students.unshift(student);
-      renderStudents();
-      updateStats();
-      showToast('Student added successfully!', 'success');
-      e.target.reset();
-    });
-
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      const searchTerm = e.target.value.toLowerCase();
-      const filtered = students.filter(student => 
-        student.name.toLowerCase().includes(searchTerm) ||
-        student.roll.toLowerCase().includes(searchTerm) ||
-        student.class.toLowerCase().includes(searchTerm)
-      );
-      renderStudents(filtered);
-    });
-
-    // Initialize
-    renderStudents();
-    updateStats();
-  </script>
+  <script src="js/app.js" defer></script>
 </body>
 </html>
