@@ -28,7 +28,7 @@ Next, you will create the NoSQL table that will store the student details.
 1.  **Navigate to DynamoDB:** Go to the AWS Console and search for **DynamoDB**.
 2.  **Create Table:** Click **Create table**.
 3.  **Table Details:**
-    * **Table name:** `student-details`
+    * **Table name:** `Student-Details`
     * **Partition key:** `ID` (select the String data type)
 4.  **Finalize:** Leave all other settings as default and click **Create table**.
 
