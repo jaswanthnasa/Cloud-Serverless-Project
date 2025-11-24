@@ -114,3 +114,53 @@ The final step is to link the Amplify frontend with the API Gateway backend.
     * Click **Actions** > **Deploy API** and select your existing stage (e.g., `student-api`). Click **Deploy**.
 
 The application is now fully functional. You can access the Amplify app URL to view existing data and add new records, validating the end-to-end serverless implementation.
+
+
+## 🗑️ Clean Up Process (Resource Deletion)
+
+After testing your application, it's crucial to delete all created AWS resources to stop incurring ongoing costs. Follow these steps in order, as some resources depend on others.
+
+---
+
+### Step 1: Delete the API Gateway
+
+1.  Go to **API Gateway** in the AWS Console.
+2.  Select the **`Student-API`** REST API.
+3.  From the **Actions** dropdown, choose **Delete API**. Confirm the deletion.
+
+---
+
+### Step 2: Delete Lambda Functions and CloudWatch Logs
+
+1.  **Delete Functions:** Go to **AWS Lambda**.
+2.  Select both **`add-student-function`** and **`get-student-function`**.
+3.  From the **Actions** dropdown, choose **Delete**. Confirm the deletion.
+4.  **Delete Log Groups:** Go to **CloudWatch** > **Log Groups**.
+5.  Search for the log groups associated with your Lambda functions (names typically start with `/aws/lambda/`).
+6.  Select the log groups for both functions and choose **Actions** > **Delete log group**. Confirm the deletion.
+
+---
+
+### Step 3: Delete the DynamoDB Table
+
+1.  **Delete Table:** Go to **DynamoDB** in the AWS Console.
+2.  Select the **`student-details`** table.
+3.  Click the **Delete** button and confirm the deletion.
+
+---
+
+### Step 4: Delete the IAM Role and Policy
+
+Since the Lambda functions are deleted, you can remove the role they used.
+
+1.  **Delete Role:** Go to **IAM** > **Roles**.
+2.  Search for the Lambda execution role (the one created automatically or the one you manually configured).
+3.  Select the role and click **Delete role**. Ensure any inline policies (like the `DynamoDB-permission`) are removed with the role.
+
+---
+
+### Step 5: Delete the AWS Amplify App
+
+1.  **Delete App:** Go to **AWS Amplify**.
+2.  Select your deployed application (the one connected to your GitHub repository).
+3.  In the top right corner, click **Actions** > **Delete app**. Confirm the deletion. This will remove all frontend hosting resources.
